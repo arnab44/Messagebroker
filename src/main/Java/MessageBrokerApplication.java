@@ -10,12 +10,15 @@ public class MessageBrokerApplication {
       //  Queue<Message> queue =
 
         MessageQueue mq = new MessageQueue("msg", new ConcurrentLinkedQueue<Message>(), 0L, null);
-     //   Broker server = new Broker(mq, null);
-        Thread server = new Thread(new Broker(mq, null));
-        server.start();
+        //Broker server = new Broker(mq, null);
+        Thread producerServer = new Thread(new Broker(mq, null));
+        producerServer.start();
+        System.out.println("Broker prod started");
 
         Thread consumerServer = new Thread(new BrokerConsumer(mq, null));
         consumerServer.start();
-       // server.receiveAndProcessMessage();
+        System.out.println("Broker consumer started");
+
+
     }
 }

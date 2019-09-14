@@ -47,6 +47,9 @@ public class MessageQueue {
 
     public  Message poll(){
         Message m =  this.getQ().poll();
+        if (m != null) {
+            size = (size - m.getHeader().getSize());
+        }
         return  m;
     }
 

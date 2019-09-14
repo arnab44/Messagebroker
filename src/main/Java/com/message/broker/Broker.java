@@ -23,6 +23,13 @@ public class Broker implements  Runnable
         this.brokerServer = BrokerServer.getBrokerServer();
         this.mq = mq;
         this.consumerIP = consumerIP;
+        try {
+            this.server = new ServerSocket(5002);
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+
 
     }
     public void run() {
@@ -33,10 +40,11 @@ public class Broker implements  Runnable
         // starts server and waits for a connection
         try
         {
-            server = brokerServer.getServerSocket();
-            System.out.println("Waiting for a client ...");
+          //  server = brokerServer.getServerSocket();
+
+            System.out.println("Waiting for a producer ...");
             socket = server.accept();
-            System.out.println("Client accepted");
+            System.out.println("producer connection accepted at "+ brokerServer.getListenPort());
 
             ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
 
@@ -52,8 +60,8 @@ public class Broker implements  Runnable
                         break;
                     }
                 //TODO Remove later
-                    System.out.println("----------");
-                    System.out.println(msg.getHeader().getFileName()+" "+ msg.getHeader().getSize());
+                //    System.out.println("----------");
+                  //  System.out.println(msg.getHeader().getFileName()+" "+ msg.getHeader().getSize());
                     enQueueMessage(msg);
 
                 }
@@ -83,11 +91,6 @@ public class Broker implements  Runnable
        if(!isenQueued) {
            System.out.println("Message not enQueued successfully "+ msg.getHeader().getFileName());
        }
-    }
-
-    public Message pollMessage() {
-        while(this.mq.getQ().isEmpty());
-        return this.mq.getQ().poll();
     }
 
     //public void ()
