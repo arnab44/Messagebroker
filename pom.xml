@@ -49,7 +49,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>MessageProducerApplication</mainClass>
+                            <mainClass>MessageBrokerApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
