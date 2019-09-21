@@ -7,7 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MessageBrokerApplication {
-    private static final int MAX_SIZE = 2*1024*1024*1024;
+    private static final int MAX_SIZE = (4*1024*1024*1024 - 300* 1024*1024 );
     public  static  void  main(String[] args) {
       //  ArrayBlockingQueue<Message> abq
         //        = new ArrayBlockingQueue<Message>(215000000);
