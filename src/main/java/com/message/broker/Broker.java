@@ -70,6 +70,7 @@ public class Broker implements  Runnable
                     Runtime runtime = Runtime.getRuntime();
                     System.out.println("free= "+runtime.freeMemory() +"  max= "+ runtime.maxMemory());
                     if(runtime.freeMemory()<minRunningMemory) {
+                        System.out.println("GC");
                         System.gc();
                     }
 
@@ -79,7 +80,7 @@ public class Broker implements  Runnable
                     System.out.println(i);
                 }
                 catch (Exception e){
-                    System.out.println("non io exception "+ e.toString());
+                    System.out.println("non io exception . doing gc"+ e.toString());
                     System.gc();
                 }
             }
