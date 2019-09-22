@@ -65,7 +65,7 @@ public class Broker implements  Runnable
                   //  System.out.println(msg.getHeader().getFileName()+" "+ msg.getHeader().getSize());
                     enQueueMessage(msg);
                  //   msg = null;
-                  //  System.gc();
+                    System.gc();
 
                 }
                 catch(IOException i)
