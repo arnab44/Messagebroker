@@ -36,7 +36,7 @@ public class MessageQueue {
         }
         try{
            this.getQ().add(m);
-          //  this.getQ().offer(m);
+
             size = size +  m.getHeader().getSize();
             return true;
         }

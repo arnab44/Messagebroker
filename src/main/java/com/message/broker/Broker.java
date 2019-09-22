@@ -19,6 +19,7 @@ public class Broker implements  Runnable
     private MessageQueue mq = null;
 
 
+
     public Broker(MessageQueue mq, List<String>consumerIP){
         this.brokerServer = BrokerServer.getBrokerServer();
         this.mq = mq;
@@ -47,7 +48,7 @@ public class Broker implements  Runnable
             System.out.println("producer connection accepted at "+ brokerServer.getListenPort());
 
             ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
-            Message msg= null;
+            Message msg;
             boolean flag = true;
             while (flag)
             {
@@ -63,8 +64,8 @@ public class Broker implements  Runnable
                 //    System.out.println("----------");
                   //  System.out.println(msg.getHeader().getFileName()+" "+ msg.getHeader().getSize());
                     enQueueMessage(msg);
-                    msg = null;
-                    System.gc();
+                 //   msg = null;
+                  //  System.gc();
 
                 }
                 catch(IOException i)
