@@ -9,8 +9,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class MessageBrokerApplication {
     private static final int MAX_SIZE = (4*1024*1024*1024 - 300* 1024*1024 );
     public  static  void  main(String[] args) {
+           System.out.println("heap memory allocated " + Runtime.getRuntime().maxMemory()/1024/1024 + "MB");
       //  ArrayBlockingQueue<Message> abq
         //        = new ArrayBlockingQueue<Message>(215000000);
+
         MessageQueue mq = new MessageQueue("msg", new ConcurrentLinkedQueue<Message>(), 0L, null);
       //  MessageQueue mq = new MessageQueue("msg", new ArrayBlockingQueue<Message>(215000000), 0L, null);
         //Broker server = new Broker(mq, null);
