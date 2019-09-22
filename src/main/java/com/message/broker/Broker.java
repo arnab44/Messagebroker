@@ -47,13 +47,13 @@ public class Broker implements  Runnable
             System.out.println("producer connection accepted at "+ brokerServer.getListenPort());
 
             ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
-
+            Message msg= null;
             boolean flag = true;
             while (flag)
             {
                 try
                 {
-                    Message msg = (Message)in.readObject();
+                    msg = (Message)in.readObject();
                     if(msg.getHeader().getSize()<0) {
                         flag = false;
                         enQueueMessage(msg);
@@ -63,6 +63,8 @@ public class Broker implements  Runnable
                 //    System.out.println("----------");
                   //  System.out.println(msg.getHeader().getFileName()+" "+ msg.getHeader().getSize());
                     enQueueMessage(msg);
+                    msg = null;
+                    System.gc();
 
                 }
                 catch(IOException i)
