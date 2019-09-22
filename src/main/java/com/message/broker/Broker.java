@@ -68,9 +68,10 @@ public class Broker implements  Runnable
                     long minRunningMemory = (5*1024*1024);
 
                     Runtime runtime = Runtime.getRuntime();
-
-                    if(runtime.freeMemory()<minRunningMemory)
+                    System.out.println("free= "+runtime.freeMemory() +"  max= "+ runtime.maxMemory());
+                    if(runtime.freeMemory()<minRunningMemory) {
                         System.gc();
+                    }
 
                 }
                 catch(IOException i)
@@ -78,7 +79,8 @@ public class Broker implements  Runnable
                     System.out.println(i);
                 }
                 catch (Exception e){
-                    System.out.println(e.toString());
+                    System.out.println("non io exception "+ e.toString());
+                    System.gc();
                 }
             }
             System.out.println("Closing connection");
