@@ -46,14 +46,14 @@ public class Broker implements  Runnable
             System.out.println("Waiting for a producer ...");
             socket = server.accept();
             System.out.println("producer connection accepted at "+ brokerServer.getListenPort());
-
-            ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
+            
             Message msg;
             boolean flag = true;
             while (flag)
             {
                 try
                 {
+                    ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
                     msg = (Message)in.readObject();
                     if(msg.getHeader().getSize()<0) {
                         flag = false;
@@ -74,22 +74,21 @@ public class Broker implements  Runnable
                         System.gc();
                     }
 
-                }
-                catch(IOException i)
-                {
+                } 
+                catch(IOException i) {
                     System.out.println(i);
                 }
-                catch (Exception e){
+                catch (Exception e) { 
                     System.out.println("non io exception . doing gc"+ e.toString());
                     System.gc();
                 }
+                finally {
+                    in.close();
+                }
             }
             System.out.println("Closing connection");
-
             // close connection
             socket.close();
-            in.close();
-
         }
         catch(IOException i)
         {
