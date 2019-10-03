@@ -48,13 +48,13 @@ public class Broker implements  Runnable
             System.out.println("producer connection accepted at "+ brokerServer.getListenPort());
 
           // Message msg;
+           ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
             boolean flag = true;
             while (flag)
             {
-                ObjectInputStream in = null;
+
                 try
                 {
-                    in =new ObjectInputStream(socket.getInputStream());
                  Message   msg = (Message)in.readObject();
                     if(msg.getHeader().getSize()<0) {
                         flag = false;
@@ -84,9 +84,9 @@ public class Broker implements  Runnable
                     System.gc();
                 }
                 finally {
-                    in.close();
                 }
             }
+            in.close();
             System.out.println("Closing connection");
             // close connection
             socket.close();
