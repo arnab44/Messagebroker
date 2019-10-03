@@ -47,7 +47,7 @@ public class Broker implements  Runnable
             socket = server.accept();
             System.out.println("producer connection accepted at "+ brokerServer.getListenPort());
 
-          // Message msg;
+           Message msg;
            ObjectInputStream in =new ObjectInputStream(socket.getInputStream());
             boolean flag = true;
             while (flag)
@@ -55,7 +55,7 @@ public class Broker implements  Runnable
 
                 try
                 {
-                 Message   msg = (Message)in.readObject();
+                    msg = (Message)in.readObject();
                     if(msg.getHeader().getSize()<0) {
                         flag = false;
                         enQueueMessage(msg);
